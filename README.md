@@ -1,4 +1,4 @@
-# Classificação de Notícias: Fake ou Real
+# Detecção de Fake news
 
 Este projeto visa desenvolver uma Inteligência Artificial (IA) para classificar notícias como falsas ou reais. Utilizando tecnologias avançadas e metodologias de processamento de dados, nosso objetivo é oferecer uma ferramenta eficaz na detecção de fake news.
 
