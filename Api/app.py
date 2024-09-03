@@ -10,32 +10,6 @@ from transformers import BertForSequenceClassification, BertTokenizer
 app = Flask(__name__)
 CORS(app)
 
-'''# Funções auxiliares para processamento de texto
-def remove_urls(text):
-    return re.sub(r'http\S+', '', text)
-
-def uppercase_percentage(text):
-    total_letters = sum(1 for char in text if char.isalpha())
-    if total_letters == 0:
-        return 0
-    uppercase_count = sum(1 for char in text if char.isupper())
-    percentage = (uppercase_count / total_letters)
-    return percentage
-
-def count_special_chars(text):
-    special_chars = ['!']
-    return sum(1 for char in text if char in special_chars)
-
-def remove_special_characters(text):
-    pattern = r'[^\w\s]'
-    clean_text = re.sub(pattern, ' ', text)
-    return clean_text
-
-def remove_numbers(text):
-    return re.sub(r'\b\w*\d\w*\b', '', text).strip()
-
-fakeNewsList = ['lul', 'ment', 'faz', 'pod', 'tud', 'vai', 'terr', 'plan', 'brasil', 'bolsonar', 'tod', 'mai', 'mora']'''
-
 @app.route('/classify', methods=['POST'])
 def classify_news():
     data = request.json
@@ -43,27 +17,13 @@ def classify_news():
     if not text:
         return jsonify({'error': 'Texto não fornecido'}), 400
     
-    '''  # Processo de pré-processamento
-    text = remove_urls(text)
-    text = remove_special_characters(text)
-    text = remove_numbers(text)
-
-    # Adiciona o texto ao DataFrame
-    data_df = pd.DataFrame({
-        'TEXT': [text],
-        'RESULTADO': [None]
-    })
-
-    data_df['uppercase_percentage'] = data_df['TEXT'].apply(uppercase_percentage)
-    data_df['special_char_count'] = data_df['TEXT'].apply(count_special_chars)
-    '''
     # Carregar o modelo e tokenizer
-    tokenizer = BertTokenizer.from_pretrained('caminho para pasta token dentro de codes')
+    tokenizer = BertTokenizer.from_pretrained('C:\\Users\\pedro\\OneDrive\\Desktop\\Ia2\\Projeto-IA\\codes\\token')
     model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
     model.to(torch.device('cpu'))
 
     # Carregar os parâmetros salvos
-    model.load_state_dict(torch.load('caminho para o melhor_modelo_bert.pkl', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load('melhormodelobert.pkl', map_location=torch.device('cpu')))
 
     # Configurar o modelo para avaliação
     model.eval()
