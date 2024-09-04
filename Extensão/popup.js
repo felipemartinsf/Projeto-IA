@@ -25,7 +25,7 @@ document.getElementById('classify-btn').addEventListener('click', async () => {
 
                     let result = await response.json();
                     console.log('Resultado da API:', result);
-                    document.getElementById('status').innerText = result.isFake ? 'Fake News!' : 'Noticia Verdadeira';
+                    document.getElementById('status').innerText = result.isFake ? 'Esta é provavelmente uma fake news. Pesquise em sites de confiança para ter certeza.' : 'Esta é provavelmente uma notícia verdadeira. Pesquise em sites de confiança para ter certeza.';
                 } catch (error) {
                     console.error('Erro ao chamar a API:', error);
                     document.getElementById('status').innerText = 'Erro ao classificar a noticia.';
